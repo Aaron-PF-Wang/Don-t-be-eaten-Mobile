@@ -69,7 +69,7 @@ button:hover{transform:translate(-2px,-2px)}
 button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--red)}
 .mobile-controls{position:absolute;inset:0;z-index:7;opacity:1;transition:opacity .2s;pointer-events:none}
 .mobile-controls.is-hidden{opacity:0;pointer-events:none}
-.mobile-dpad,.mobile-actions{position:absolute;bottom:clamp(18px,6vh,64px);pointer-events:auto}
+.mobile-dpad,.mobile-actions{position:absolute;bottom:clamp(42px,8vh,88px);pointer-events:auto}
 .mobile-dpad{left:clamp(14px,4vw,48px);display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:4px}
 .mobile-dpad [data-key="w"]{grid-column:2;grid-row:1}
 .mobile-dpad [data-key="a"]{grid-column:1;grid-row:2}
@@ -82,7 +82,7 @@ button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--red)}
 .mobile-key.is-locked{display:none}
 .mobile-key.pressed,.mobile-key:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 @media(max-width:650px){.shell{min-height:420px}.topbar{top:16px;left:16px;right:16px}.egg-count{padding:9px 12px;font-size:11px}.hit-message{top:82px;width:calc(100% - 32px);font-size:clamp(26px,7vw,36px)}.story{padding:20px}.story-text{max-width:92%;font-size:16px}.modal{padding:25px 20px}.paint-panel{left:10px;gap:12px}.paint-tool{min-width:92px;padding:8px 7px;font-size:11px}.paint-confirm{padding:9px 14px}}
-@media(max-width:650px){.mobile-dpad,.mobile-actions{bottom:clamp(16px,5vh,42px);grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);grid-auto-rows:44px;gap:3px}.mobile-actions{grid-template-columns:repeat(2,44px)}.mobile-key{width:44px;height:44px;font-size:16px}}
+@media(max-width:650px){.mobile-dpad,.mobile-actions{bottom:clamp(30px,7vh,62px);grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);grid-auto-rows:44px;gap:3px}.mobile-actions{grid-template-columns:repeat(2,44px)}.mobile-key{width:44px;height:44px;font-size:16px}}
 </style>
 </head>
 <body>
@@ -529,7 +529,7 @@ button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--red)}
     if(paintStoryMode==="fade-to-black"&&paintStoryTimer>=2.5){paintStoryMode="thanks";paintStoryTimer=0}
   }
   function drawImageCover(img){if(!(img?.complete&&img.naturalWidth)){ctx.fillStyle="#f5f5f2";ctx.fillRect(0,0,W,H);return}const scale=Math.max(W/img.naturalWidth,H/img.naturalHeight),drawW=img.naturalWidth*scale,drawH=img.naturalHeight*scale;ctx.drawImage(img,(W-drawW)*.5,(H-drawH)*.5,drawW,drawH)}
-  function longImageLayout(img){const halfHeight=img.naturalHeight*.5,scale=Math.max(W/img.naturalWidth,H/halfHeight),h=halfHeight*scale;return{x:(W-img.naturalWidth*scale)*.5,y:H-h,w:img.naturalWidth*scale,h}}
+  function longImageLayout(img){const halfHeight=img.naturalHeight*.5,scale=H>W?W/img.naturalWidth:Math.max(W/img.naturalWidth,H/halfHeight),h=halfHeight*scale;return{x:(W-img.naturalWidth*scale)*.5,y:H-h,w:img.naturalWidth*scale,h}}
   function drawLongImageHalf(img){if(!(img?.complete&&img.naturalWidth)){ctx.fillStyle="#f5f5f2";ctx.fillRect(0,0,W,H);return}const layout=longImageLayout(img);ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight*.5,layout.x,layout.y,layout.w,layout.h)}
   function drawLongImageRotated(img,progress){if(!(img?.complete&&img.naturalWidth)){ctx.fillStyle="#f5f5f2";ctx.fillRect(0,0,W,H);return}const layout=longImageLayout(img);ctx.save();ctx.translate(W*.5,H);ctx.rotate(Math.PI*clamp(progress,0,1));ctx.translate(-W*.5,-H);ctx.drawImage(img,layout.x,layout.y,layout.w,layout.h*2);ctx.restore()}
   function meteorPoint(meteor,p){const q=1-p;return{x:q*q*meteor.startX+2*q*p*meteor.controlX+p*p*meteor.endX,y:q*q*meteor.startY+2*q*p*meteor.controlY+p*p*meteor.endY}}
